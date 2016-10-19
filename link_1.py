@@ -36,6 +36,7 @@ class Link:
             return #return if no packet to transfer
         if len(pkt_S) > self.mtu:
             print('%s: packet "%s" length greater then link mtu (%d)' % (self, pkt_S, self.mtu))
+            print('length is '+str(len(pkt_S)))
             return #return without transmitting if packet too big
         #otherwise transmit the packet
         try:
