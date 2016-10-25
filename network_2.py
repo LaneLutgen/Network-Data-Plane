@@ -98,7 +98,7 @@ class Host:
     # @param dst_addr: destination address for the packet
     # @param data_S: data being transmitted to the network layer
     def udt_send(self, dst_addr, data_S):
-        mtu_L = 80
+        mtu_L = 50
         while len(data_S) + NetworkPacket.dst_addr_S_length > NetworkPacket.dst_addr_S_length:
             p = NetworkPacket(dst_addr, data_S[:mtu_L - NetworkPacket.dst_addr_S_length], 0 , 0)
             self.out_intf_L[0].put(p.to_byte_S()) #send packets always enqueued successfully
@@ -120,14 +120,17 @@ class Host:
             elif self.fragmented == True and p.frag_flag == 1:
                 print('%s: packet fragmented, awaiting next fragment...' % self)
                 #Concatenate packets
-                self.pkt_data += p.data_S
+                if len(self.pkt_data) == p.offset:
+                    self.pkt_data += p.data_S
 
             elif self.fragmented == True and p.frag_flag == 0:
                 print('%s: final fragment received, reassembling message...' % self)
                 #Final packet fragment
-                self.pkt_data += p.data_S
+                if len(self.pkt_data) == p.offset:
+                    self.pkt_data += p.data_S
                 final = NetworkPacket(self.pkt_dst_addr, self.pkt_data, 0, 0)
                 print('%s: received message "%s"' % (self, final))
+                self.pkt_data = ''
                 pass
             else:
                 #No packets were fragmented
