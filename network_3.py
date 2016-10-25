@@ -130,34 +130,18 @@ class Router:
             pkt_S = None
             try:
                 #get packet from interface 0
-                pkt_S = self.in_intf_L[0].get()
+                pkt_S = self.in_intf_L[i].get()
                 #if packet exists make a forwarding decision
                 if pkt_S is not None:
                     p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
                     # HERE you will need to implement a lookup into the 
                     # forwarding table to find the appropriate outgoing interface
                     # for now we assume the outgoing interface is also i
-                    self.out_intf_L[0].put(p.to_byte_S(), True)
-                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, 0, 0))
+                    self.out_intf_L[i].put(p.to_byte_S(), True)
+                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, i))
 
             except queue.Full:
-                print('%s: packet "%s" lost on interface %d' % (self, p, 0))
-                pass
-            
-            try:
-                #get packet from interface 1
-                pkt_S = self.in_intf_L[1].get()
-                #if packet exists make a forwarding decision
-                if pkt_S is not None:
-                    p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
-                    # HERE you will need to implement a lookup into the 
-                    # forwarding table to find the appropriate outgoing interface
-                    # for now we assume the outgoing interface is also i
-                    self.out_intf_L[1].put(p.to_byte_S(), True)
-                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, 1, 1))
-                    
-            except queue.Full:
-                print('%s: packet "%s" lost on interface %d' % (self, p, 1))
+                print('%s: packet "%s" lost on interface %d' % (self, p, i))
                 pass
                 
     ## thread target for the host to keep forwarding data
