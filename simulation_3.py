@@ -4,7 +4,7 @@ Created on Oct 12, 2016
 @author: mwitt_000
 '''
 import network_3
-import link
+import link_3
 import threading
 from time import sleep
 
