@@ -67,7 +67,7 @@ if __name__ == '__main__':
     
     #create some send events    
     client.udt_send(3, 1, 'Message through router B')
-    client.udt_send(3, 2, 'Message through router C')
+    client1.udt_send(3, 2, 'Message through router C')
 
     #give the network sufficient time to transfer all packets before quitting
     sleep(simulation_time)
