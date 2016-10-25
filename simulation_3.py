@@ -37,17 +37,17 @@ if __name__ == '__main__':
     object_L.append(router_d)
     
     #create a Link Layer to keep track of links between network nodes
-    link_layer = link.LinkLayer()
+    link_layer = link_3.LinkLayer()
     object_L.append(link_layer)
     
     #add all the links
-    link_layer.add_link(link.Link(client, 0, router_a, 0, 50))
-    link_layer.add_link(link.Link(client1, 0, router_a, 1, 50))
-    link_layer.add_link(link.Link(router_a, 0, router_b, 0, 50))
-    link_layer.add_link(link.Link(router_a, 1, router_c, 0, 50))
-    link_layer.add_link(link.Link(router_b, 0, router_d, 0, 50))
-    link_layer.add_link(link.Link(router_c, 0, router_d, 1, 50))
-    link_layer.add_link(link.Link(router_d, 0, server, 0, 50))
+    link_layer.add_link(link_3.Link(client, 0, router_a, 0, 50))
+    link_layer.add_link(link_3.Link(client1, 0, router_a, 1, 50))
+    link_layer.add_link(link_3.Link(router_a, 0, router_b, 0, 50))
+    link_layer.add_link(link_3.Link(router_a, 1, router_c, 0, 50))
+    link_layer.add_link(link_3.Link(router_b, 0, router_d, 0, 50))
+    link_layer.add_link(link_3.Link(router_c, 0, router_d, 1, 50))
+    link_layer.add_link(link_3.Link(router_d, 0, server, 0, 50))
     
     
     #start all the objects
