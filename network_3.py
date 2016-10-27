@@ -135,17 +135,15 @@ class Router:
                 #if packet exists make a forwarding decision
                 if pkt_S is not None:
                     p = NetworkPacket.from_byte_S(pkt_S) #parse a packet out
-                    if (p.src_addr == 1):
-                        out = self.rout[0]
-                        n = 0
-                    elif (p.src_addr == 2):
-                        out = self.rout[1]
-                        n = 1
-                    else:
-                        out = 0
+                    #if (rout['Source'][0] == 1):
+                    out = self.rout['Link'][i]
+                    #elif (rout['Source'][1] == 2):
+#                        out = rout['Source'][1]
+#                    else:
+#                        out = 0
                     self.out_intf_L[out].put(p.to_byte_S(), True)
                     #self.out_intf_L[i].put(p.to_byte_S(), True)
-                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, n))
+                    print('%s: forwarding packet "%s" from interface %d to %d' % (self, p, i, out))
             except queue.Full:
                 print('%s: packet "%s" lost on interface %d' % (self, p, i))
                 pass

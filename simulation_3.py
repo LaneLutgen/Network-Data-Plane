@@ -15,10 +15,19 @@ simulation_time = 1 #give the network sufficient time to transfer all packets be
 if __name__ == '__main__':
     object_L = [] #keeps track of objects, so we can kill their threads
 
-    routa = [0, 1] #These are what I used for routing tables, pretty basic, not sure if he wants more than this.
-    routb = [0]
-    routc = [0]
-    routd = [0, 1]
+    #routa = [0, 1] #These are what I used for routing tables, pretty basic, not sure if he wants more than this.
+    routa = {}
+    routa['Source'] = [1, 2]
+    routa['Link'] = [0,1]
+    routb = {}
+    routb['Source'] = [1, 2]
+    routb['Link'] = [0,1]
+    routc = {}
+    routc['Source'] = [1, 2]
+    routc['Link'] = [0,0]
+    routd = {}
+    routd['Source'] = [1, 2]
+    routd['Link'] = [0,0]
     
     #create network nodes
     client = network_3.Host(1)
@@ -48,7 +57,6 @@ if __name__ == '__main__':
     link_layer.add_link(link_3.Link(router_b, 0, router_d, 0, 50))
     link_layer.add_link(link_3.Link(router_c, 0, router_d, 1, 50))
     link_layer.add_link(link_3.Link(router_d, 0, server, 0, 50))
-    
     
     #start all the objects
     thread_L = []
